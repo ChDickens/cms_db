@@ -152,10 +152,10 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Посты <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="#">Все посты</a>
+                                <a href="posts.php">Все посты</a>
                             </li>
                             <li>
-                                <a href="#">Добавить пост</a>
+                                <a href="add_post.php">Добавить пост</a>
                             </li>
                         </ul>
                     </li>

@@ -154,10 +154,10 @@
                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Посты <i class="fa fa-fw fa-caret-down"></i></a>
                     <ul id="demo" class="collapse">
                         <li>
-                            <a href="posts.php">Все посты</a>
+                            <a href="posts.php?source">Все посты</a>
                         </li>
                         <li>
-                            <a href="add_post.php">Добавить пост</a>
+                            <a href="posts.php?source=add_post">Добавить пост</a>
                         </li>
                     </ul>
                 </li>
@@ -180,88 +180,34 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1 class="page-header">
-                        Категории
+                        Посты
                     </h1>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-12">
                     <?php
 
-                        insertCategory();
+                    if (isset($_GET['source'])) {
 
-                    ?>
-                    <form action="" method="post">
-                        <div class="form-group">
-                            <label for="category">Категории</label>
-                            <input type="text" name="title" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name="insert" class="btn btn-primary" value="Добавить категорию">
-                        </div>
-                    </form>
-                    <hr>
-                    <?php
-                    // Получаем id категории
-                    if (isset($_GET['edit'])) {
-                        $the_cat_id = $_GET['edit'];
+                        $source = $_GET['source'];
 
-                        // Выполняем запрос, чтобы получить эту категорию
-                        $the_sql_cat = "SELECT * FROM categories WHERE id = $the_cat_id";
-                        // Выполняем запрос к БД
-                        $cat_query = mysqli_query($connection, $the_sql_cat);
+                        switch ($source) {
+                            case 'add_post';
+                                include "add_post.php";
+                                break;
+                            case 'edit_post';
+                                include "edit_post.php";
+                                break;
 
-                        // Прогоняем результаты через foreach и записываем название категории
-                        foreach ($cat_query as $cat_title) {
-                            $cat_title =  $cat_title['title'];
-                        }
+                            default:
+                                include "all_posts.php";
+                                break;
 
-
-                        // Если нажата кнопка, выполняем обновление категории
-                        if (isset($_POST['update'])) {
-                            $title = $_POST['title'];
-
-                            // Выполняем запрос, чтобы обновить эту категорию
-                            $sql_update_category = "UPDATE categories SET title = '$title' WHERE id = $the_cat_id";
-                            // Выполняем запрос к БД
-                            $result_updating_cat = mysqli_query($connection, $sql_update_category);
-
-                            confirmQuery($result_updating_cat);
                         }
                     }
 
-
                     ?>
-                    <form action="" method="post">
-                        <div class="form-group">
-                            <label for="category">Категории</label>
-                            <input type="text" name="title" class="form-control" value="<?= $cat_title?>">
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name="update" class="btn btn-primary" value="Обновлять категорию">
-                        </div>
-                    </form>
-                </div>
-                <div class="col-sm-6">
-                    <table class="table table-bordered table-striped">
-                        <tbody>
-                        <tr>
-                            <td>id</td>
-                            <td>title</td>
-                            <td>Редактирование</td>
-                            <td>Удаление</td>
-                        </tr>
-
-                    <?php
-
-                        deleteCategory();
-
-                        allCategories();
-
-
-                    ?>
-                        </tbody>
-                    </table>
                 </div>
             </div>
             <!-- /.row -->
