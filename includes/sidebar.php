@@ -14,6 +14,29 @@
     </div>
     <!-- /.input-group -->
 </div>
+<div class="well">
+    <h4>Login</h4>
+    <div class="input-group">
+        <?php
+
+        if (isset($_SESSION['msg'])) {
+            echo $_SESSION['msg'];
+        }
+        ?>
+        <form action="login.php" method="post">
+            <div class="form-group">
+                <label for="">Username</label>
+                <input type="text" class="form-control" name="username">
+            </div>
+            <div class="form-group">
+                <label for="">Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+            <input type="submit" class="btn btn-default" name="login">
+        </form>
+    </div>
+    <!-- /.input-group -->
+</div>
 
 <!-- Blog Categories Well -->
 <div class="well">
