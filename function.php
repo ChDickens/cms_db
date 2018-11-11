@@ -41,11 +41,5 @@ function deleteCategory() {
     }
 }
 
-function confirmQuery($result) {
-    if (!$result) {
-        die("Запрос не удался" . mysqli_error());
-    }
-}
-
 
 ?>

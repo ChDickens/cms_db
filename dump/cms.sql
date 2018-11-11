@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 10 2018 г., 10:09
+-- Время создания: Ноя 11 2018 г., 09:32
 -- Версия сервера: 5.5.53
 -- Версия PHP: 7.0.14
 
@@ -60,6 +60,14 @@ CREATE TABLE `comments` (
   `comment_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Дамп данных таблицы `comments`
+--
+
+INSERT INTO `comments` (`comment_id`, `comment_post_id`, `comment_author`, `comment_email`, `comment_content`, `comment_status`, `comment_date`) VALUES
+(0, 1, 'sfsdfs', 'admin@admin.ru', 'sdfsdfs', 'unapproved', '2018-11-11'),
+(1, 1, 'Alex', 'alex@admin.com', 'content comment', 'approved', '2018-11-05');
+
 -- --------------------------------------------------------
 
 --
@@ -75,7 +83,7 @@ CREATE TABLE `posts` (
   `tags` text NOT NULL,
   `image` text NOT NULL,
   `content` text NOT NULL,
-  `status` tinyint(4) NOT NULL,
+  `status` varchar(255) NOT NULL,
   `comments_count` int(11) NOT NULL,
   `views_count` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -85,13 +93,13 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `category_id`, `title`, `author`, `date`, `tags`, `image`, `content`, `status`, `comments_count`, `views_count`) VALUES
-(1, 2, 'Blog Post Title 1', 'Start Bootstrap', '2018-11-03', 'PHP, javascript', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.', 0, 0, 0),
-(2, 3, 'Blog Post Title 2', 'Start Bootstrap', '2018-11-03', 'PHP', 'oboi_full_hd_molodoj_leopard.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.', 0, 0, 0),
-(3, 2, 'Blog Post Title 3', 'Start Bootstrap', '2018-11-03', 'javascript', 'oboi_full_hd_molodoj_leopard.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.', 0, 0, 0),
-(4, 3, 'Blog Post Title 4', 'Start Bootstrap', '2018-11-03', 'cms', 'oboi_full_hd_molodoj_leopard.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.', 0, 0, 0),
-(5, 2, 'парпар', 'asdasd', '2018-11-05', 'паррапрапр', '', ' вапвапвапвап', 1, 0, 0),
-(6, 2, 'вапавп', 'вапвап', '2018-11-05', 'выпавы', '', ' выавыа', 1, 0, 0),
-(7, 2, 'dsfdsfds', 'asdasd', '2018-11-05', 'sdfdsfdsf', '23-14.jpg', ' dfsdfsdf', 1, 0, 0);
+(1, 4, 'Blog Post Title 1', 'Start Bootstrap', '2018-11-03', 'PHP, javascript', '', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.', 'published', 0, 12),
+(2, 4, 'Blog Post Title 2', 'Start Bootstrap', '2018-11-03', 'PHP', 'oboi_full_hd_molodoj_leopard.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.', 'published', 0, 2),
+(3, 12, 'Blog Post Title 3', 'Start Bootstrap', '2018-11-03', 'javascript', 'oboi_full_hd_molodoj_leopard.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.', 'published', 0, 0),
+(4, 12, 'Blog Post Title 4', 'Start Bootstrap', '2018-11-03', 'cms', 'oboi_full_hd_molodoj_leopard.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora, necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi corrupti debitis ipsum officiis rerum.', 'published', 0, 0),
+(5, 13, 'парпар', 'asdasd', '2018-11-05', 'паррапрапр', '', ' вапвапвапвап', 'draft', 0, 0),
+(6, 13, 'вапавп', 'вапвап', '2018-11-05', 'выпавы', '', ' выавыа', 'draft', 0, 0),
+(7, 13, 'dsfdsfds', 'asdasd', '2018-11-05', 'sdfdsfdsf', '23-14.jpg', ' dfsdfsdf', 'draft', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -116,7 +124,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `user_password`, `user_firstname`, `user_lastname`, `user_email`, `user_image`, `user_role`, `randSalt`) VALUES
-(1, 'alex', 'alex', 'alex', 'novikov', 'alex@cms.by', 'default_avatar.jpg', 'admin', '$2y$10$iusesomecrazystrings22');
+(1, 'alex', '$2y$12$KXGIfA8Z3z29QhM2kogDQe3Vy7csUcp84ByHCvThXto68r35kBLJu', 'alex', 'novikov', 'alex@cms.by', 'default_avatar.jpg', 'admin', '$2y$10$iusesomecrazystrings22');
 
 --
 -- Индексы сохранённых таблиц

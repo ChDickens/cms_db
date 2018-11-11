@@ -32,14 +32,14 @@ if(isset($_SESSION['username']) && is_admin($_SESSION['username'])){
 
 
 
-      $stmt1 = mysqli_prepare($connection, "SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ?");
+      $stmt1 = mysqli_prepare($connection, "SELECT id, title, author, date, image, content FROM posts WHERE category_id = ?");
 
 
 
 
     } else {
 
-         $stmt2 = mysqli_prepare($connection, "SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? AND post_status = ? ");
+         $stmt2 = mysqli_prepare($connection, "SELECT id, title, author, date, image, content FROM posts WHERE category_id = ? AND status = ? ");
 
          $published = 'published';
 
@@ -69,18 +69,6 @@ if(isset($_SESSION['username']) && is_admin($_SESSION['username'])){
      $stmt = $stmt2;
 
     }
-
-
-
-    // if(mysqli_stmt_num_rows($stmt) < 1) {
-
-
-
-         // echo "<h1 class='text-center'>No Post available for this category</h1>";
-
-
-
-    // } else 
 
 
 
@@ -136,7 +124,9 @@ if(isset($_SESSION['username']) && is_admin($_SESSION['username'])){
             <!-- Blog Sidebar Widgets Column -->
             
             
-            <?php include "includes/sidebar.php";?>
+            <div class="col-md-4">
+              <?php include "includes/sidebar.php";?>
+            </div>
              
 
         </div>

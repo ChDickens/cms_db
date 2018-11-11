@@ -24,7 +24,7 @@
 
 
 
-        $update_statement = mysqli_prepare($connection, "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = ?");
+        $update_statement = mysqli_prepare($connection, "UPDATE posts SET views_count = views_count + 1 WHERE id = ?");
 
         mysqli_stmt_bind_param($update_statement, "i", $the_post_id);
 
@@ -43,11 +43,11 @@
     if(isset($_SESSION['username']) && is_admin($_SESSION['username']) ) {
 
 
-         $stmt1 = mysqli_prepare($connection, "SELECT post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_id = ?");
+         $stmt1 = mysqli_prepare($connection, "SELECT title, author, date, image, content FROM posts WHERE id = ?");
 
 
     } else {
-        $stmt2 = mysqli_prepare($connection , "SELECT post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_id = ? AND post_status = ? ");
+        $stmt2 = mysqli_prepare($connection , "SELECT title, author, date, image, content FROM posts WHERE id = ? AND status = ? ");
 
         $published = 'published';
 
@@ -255,7 +255,10 @@ echo "<script>alert('Fields cannot be empty')</script>";
             <!-- Blog Sidebar Widgets Column -->
             
             
-            <?php include "includes/sidebar.php";?>
+            <div class="col-md-4">
+                <?php include "includes/sidebar.php";?>
+                
+            </div>
              
 
         </div>
