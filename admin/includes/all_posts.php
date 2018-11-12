@@ -17,7 +17,11 @@
 
 <?php
 
-$sql_all_posts = "SELECT * FROM posts";
+//$sql_all_posts = "SELECT * FROM posts";
+$sql_all_posts = "SELECT posts.id, posts.category_id, posts.title, posts.author, posts.date, posts.tags, posts.image,";
+$sql_all_posts.= "posts.content, posts.status, categories.category_id, categories.category_title ";
+$sql_all_posts.= "FROM posts LEFT JOIN categories ON posts.category_id = categories.category_id";
+
 $all_posts_result = mysqli_query($connection, $sql_all_posts);
 confirmQuery($all_posts_result);
 
@@ -26,7 +30,7 @@ foreach ($all_posts_result as $post) {
 
     <tr>
         <td><?= $post['id'];?></td>
-        <td><?= $post['category_id'];?></td>
+        <td><?= $post['category_title'];?></td>
         <td><?= $post['title'];?></td>
         <td><?= $post['author'];?></td>
         <td><?= $post['date'];?></td>

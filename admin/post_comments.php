@@ -72,7 +72,7 @@ confirmQuery($update_to_delete);
             
             
          break;
-        
+
         
         }
     
@@ -101,6 +101,7 @@ confirmQuery($update_to_delete);
         <option value="approved">Approve</option>
         <option value="unapproved">Unapprove</option>
         <option value="delete">Delete</option>
+        <option value="clone">clone</option>
         </select>
 
         </div> 
